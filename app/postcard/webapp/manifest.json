@@ -9,7 +9,17 @@
 		},
 		"title": "{{appTitle}}",
 		"description": "{{appDescription}}",
-		"resources": "resources.json",
+        "resources": "resources.json",
+        "dataSources": {
+			"mainService": {
+				"uri": "/v2/catalog/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
+
+		},
 		"ach": "ach",
 		"sourceTemplate": {
 			"id": "html5moduletemplates.basicSAPUI5ApplicationProjectModule",
@@ -37,10 +47,10 @@
 	"sap.ui5": {
 		"flexEnabled": false,
 		"rootView": {
-			"viewName": "com.sap.postcard.postcard.view.postCardDisplay",
+			"viewName": "com.sap.postcard.postcard.view.postCardList",
 			"type": "XML",
 			"async": true,
-			"id": "postCardDisplay"
+			"id": "postCardList"
 		},
 		"dependencies": {
 			"minUI5Version": "1.60.1",
@@ -60,7 +70,13 @@
 				"settings": {
 					"bundleName": "com.sap.postcard.postcard.i18n.i18n"
 				}
-			}
+            },
+            "": {
+				"dataSource": "mainService",
+				"settings": {
+					"defaultBindingMode": "TwoWay"
+                }
+            }
 		},
 		"resources": {
 			"css": [{
@@ -81,6 +97,10 @@
 				"name": "RoutepostcardCreate",
 				"pattern": "RoutepostcardCreate",
 				"target": ["TargetpostcardCreate"]
+			}, {
+				"name": "postCardCreate",
+				"pattern": "",
+				"target": ["postCardCreate"]
 			}],
 			"targets": {
 				"TargetpostcardCreate": {
@@ -88,6 +108,13 @@
 					"transition": "slide",
 					"clearControlAggregation": false,
 					"viewId": "postcardCreate",
+					"viewName": "postcardCreate"
+                },
+                "postCardCreate": {
+					"viewType": "XML",
+					"transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "postcardCreate",
 					"viewName": "postcardCreate"
 				}
 			}

@@ -1,165 +1,17 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.postcard.postcard.controller.postcardCreate" xmlns:uxap="sap.uxap"
 	xmlns="sap.m" xmlns:forms="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" version="1.0"
 	xmlns:rte="sap.ui.richtexteditor" height="100%">
-	<uxap:ObjectPageLayout showTitleInHeaderContent="true" showHeaderContent="true" showAnchorBar="true" upperCaseAnchorBar="false"
-		showFooter="true" subSectionLayout="TitleOnTop" id="idPage">
-        <!-- <Page enableScrolling="false"> -->
-		<uxap:headerContent/>
-		<uxap:headerTitle>
-			<uxap:ObjectPageHeader objectImageURI="/build/uilibraries/content/static/image-canvas.svg" objectTitle="Postcard"
-				objectSubtitle="{oBasicInfoModel>/SOLREQID}" isObjectTitleAlwaysVisible="false" isObjectSubtitleAlwaysVisible="false"
-				isActionAreaAlwaysVisible="false">
-				<!--<uxap:actions>-->
-				<!--<Button text="Action Button" type="Transparent" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>-->
-				<!--</uxap:actions>-->
-				<!--	<uxap:breadCrumbsLinks/>-->
-				<!--<uxap:navigationBar/>-->
-			</uxap:ObjectPageHeader>
-		</uxap:headerTitle>
-		<uxap:sections>
-			<uxap:ObjectPageSection showTitle="true" title="General" titleUppercase="false" visible="true" id="headerId">
-				<uxap:subSections>
-					<uxap:ObjectPageSubSection title="General" id="idHeader" titleUppercase="false">
-						<uxap:blocks>
-							<!--<Label text="Some random text" width="50%" design="Standard" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
-							<!--<forms:SimpleForm editable="true" layout="ColumnLayout" id="idHeaderSection1" columnsM="2" columnsL="3" columnsXL="4" >-->
-							<forms:SimpleForm editable="true" layout="ColumnLayout" id="idHeaderSection1" columnsM="2" columnsL="3" columnsXL="3">
-								<forms:content>
-									<!--<core:Title/>-->
-									<Label text="User" required="true"/>
-									<Input value="{UserID}" id="idSolutioningRequest" liveChange="handleUserInput" required="true" fieldGroupIds="fgUser"/>
-									<!--<Label text="{i18n>Solution_Lead}"/>-->
-									<!--<Input value="{oBasicInfoModel>/SOLLEADNAM}" id="idsolutionLead" editable="false"/>-->
-									<Label text="Project Type" required="true"/>
-									<Select id="idStatus" items="{path:'/Status',sorter: { path: 'SORTORDER' } }" selectedKey="{oBasicInfoModel>/REQSTATUSID_MCSTATUSID}"
-										forceSelection="false" fieldGroupIds="fgUser" change="handleUserInput">
-										<core:Item key="{MCSTATUSID}" text="{TXT}"></core:Item>
-									</Select>
-									<Label text="Start Date" required="true"/>
-									<Select id="idproposalType" items="{path:'/ProposalType', sorter: { path: 'SORTORDER' }}"
-										selectedKey="{oBasicInfoModel>/PRPSLTYPEID_MCPRPSLTYPEID}" forceSelection="false" fieldGroupIds="fgUser" change="handleUserInput">
-										<core:Item key="{MCPRPSLTYPEID}" text="{TXT}"></core:Item>
-									</Select>
-									<!-- <Label text="{i18n>Priority}"/>
-									<Select id="idPriority" items="{path: '/MCPriority', sorter: { path: 'SORTORDER' }}"
-										selectedKey="{oBasicInfoModel>/PRIORITYID_MCPRIORITYID}" forceSelection="false">
-										<core:Item key="{MCPRIORITYID}" text="{TXT}"></core:Item>
-									</Select> -->
-									<!--</forms:content>
-							</forms:SimpleForm>
-							<forms:SimpleForm editable="true" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="4" id="idHeaderSection2">
-								<forms:content>-->
-									<Label text="Customer"/>
-									<Input value="{oBasicInfoModel>/DEALREF} ({oBasicInfoModel>/DEALID_DEALID})" id="idDealID" liveChange="createSRDialog" editable="false"/>
-									<!--<Label text="{i18n>Deal_Description}"/>
-									<Input value="{oBasicInfoModel>/DEALREF}" id="idDealDescription" editable="false"/>-->
-									<!--	<Label text="{i18n>Revenue_Total}"/>
-									<Input value="{oBasicInfoModel>/REVENUETOT}" id="idRevenueTotal" editable="false"/>-->
-									<Label text="Solution"/>
-									<Input id="idRevenueCloud" editable="false"/>
-									<Input editable="false" value="{oBasicInfoModel>/REVCURRID}">
-										<layoutData>
-											<forms:ColumnElementData cellsSmall="3" cellsLarge="1"/>
-										</layoutData>
-									</Input>
-									<Label text="End Date"/>
-									<Input id="idRevenueService" editable="false"/>
-									<Input editable="false" value="{oBasicInfoModel>/REVCURRID}">
-										<layoutData>
-											<forms:ColumnElementData cellsSmall="3" cellsLarge="1"/>
-										</layoutData>
-									</Input>
-									<Label text="Assignment"/>
-									<Input id="idRevenueOnPrem" editable="false"/>
-									<Input editable="false" value="{oBasicInfoModel>/REVCURRID}">
-										<layoutData>
-											<forms:ColumnElementData cellsSmall="3" cellsLarge="1"/>
-										</layoutData>
-									</Input>
-									<Label text="Industry" labelFor="AccountIDmultiInput" required="true"/>
-									<MultiInput id="idAccountID" showValueHelp="true" valueHelpRequest="onValueHelpRequestedAccount" fieldGroupIds="fgUser"/>
-									<!--<Label text="{i18n>Account}"/>-->
-									<!--<Input value="{oBasicInfoModel>/ACCNAM}" id="idAccount"/>-->
-									<!--</forms:content>
-							</forms:SimpleForm>
-							<forms:SimpleForm editable="true" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="4" id="ideHeaderSection3">
-								<forms:content>-->
-									<Label/>
-									<Label text="Engagement" required="true"/>
-									<MultiInput id="idRequester" showValueHelp="true" valueHelpRequest="onValueHelpRequestedUser" required="true" fieldGroupIds="fgUser"
-										tokenUpdate="onTokenUpdate" suggestionRows="{HarmonyUser>/}" maxSuggestionWidth="400px" showSuggestion="true" suggest="handleSuggestUser" >
-									<suggestionColumns>
-										<Column hAlign="Begin" popinDisplay="Inline" demandPopin="true">
-											<Label text="{i18n>Requester}"/>
-										</Column>
-										<Column hAlign="End" popinDisplay="Inline" demandPopin="true">
-											<Label text="{i18n>ID}"/>
-										</Column>
-									</suggestionColumns>
-									<suggestionRows>
-										<ColumnListItem>
-											<cells>
-												<Label text="{HarmonyUser>NAME}"/>
-												<Label text="{HarmonyUser>USERID}"/>
-											</cells>
-										</ColumnListItem>
-									</suggestionRows>
-									</MultiInput>
-									<!--<Input value="Maintained in Solutioning Team Section" id="idRequester" required="true" fieldGroupIds="fgUser" enabled="false" />-->
-									<Label text="Country Of Project"/>
-									<!--<Select id="idRegion" items="{/MarketUnitRelation}" selectedKey="{oBasicInfoModel>/REGIONID_MCREGIONID}" forceSelection="false" >-->
-									<!--	<core:Item key="{ServiceRegionLevel2ID}" text="{RegionName}"></core:Item>-->
-									<!--</Select>-->
-									<Select id="idRegion" items="{path:'oBasicInfoModel>/MUArray'}" selectedKey="{oBasicInfoModel>/REGIONID_MCREGIONID}" forceSelection="false"
-										editable="false">
-										<core:Item key="{oBasicInfoModel>REGIONID}" text="{oBasicInfoModel>RegionName}"></core:Item>
-									</Select>
-									<!-- <Label text="{i18n>MU}" required="true"/>
-									<Select id="idMU" items="{path:'oBasicInfoModel>/MUArray'}" forceSelection="false" change="OnMUSelection"
-										selectedKey="{oBasicInfoModel>/MKTUNITID_MCMKTUNITID}" fieldGroupIds="fgUser" required="true">
-										<core:Item key="{oBasicInfoModel>MKTUNITID_MCMKTUNITID}" text="{oBasicInfoModel>MarketUnitName}"></core:Item>
-									</Select>
-									<Label text="{i18n>Sales_Organisation}"/>
-									<Input value="{oBasicInfoModel>/SALESORGID}" id="idSalesorganization" editable="false"/> -->
-								</forms:content>
-							</forms:SimpleForm>
-						</uxap:blocks>
-						<uxap:moreBlocks/>
-						<uxap:actions/>
-					</uxap:ObjectPageSubSection>
-				</uxap:subSections>
-				<uxap:customAnchorBarButton/>
-			</uxap:ObjectPageSection>
-			
-			<uxap:ObjectPageSection showTitle="true" title="Learning" titleUppercase="false" visible="true">
-				<uxap:subSections>
-					<uxap:ObjectPageSubSection title="Learning" mode="Expanded">
-						<uxap:blocks>
-							<l:VerticalLayout width="100%" class="sapUiContentPadding" id="idVerticalLayout">
-								<!-- <rte:RichTextEditor value="Hello World" change="onChange" />
-									<rte:RichTextEditor value="Hello World" change="onChange" showGroupInsert="true" showGroupLink="true" showGroupFont="true"
-										customToolbar="true" height="300px" width="100%"/> -->
-							</l:VerticalLayout>
-						</uxap:blocks>
-						<uxap:moreBlocks/>
-						<uxap:actions/>
-					</uxap:ObjectPageSubSection>
-				</uxap:subSections>
-				<uxap:customAnchorBarButton/>
-			</uxap:ObjectPageSection>
-			
-				
-		</uxap:sections>
-		<uxap:footer visible="true">
-			<OverflowToolbar id='idOverflowCreateSR' visible="true">
-				<!--<ToolbarSpacer/>-->
-				<content>
-					<ToolbarSpacer/>
-					<Button text="Create" type="Emphasized" visible="true" press="onSaveSR" id="idCreateButton"/>
-					<Button text="Cancel" type="Default" visible="true" press="onCancelSR" id="idCancelButton"/>
-				</content>
-			</OverflowToolbar>
-		</uxap:footer>
-        <!-- </Page> -->
-	</uxap:ObjectPageLayout>
+	<!-- <Page
+		showHeader="false"
+		showNavButton="false"
+		class="sapUiContentPadding"> -->
+		<Button
+			id="buttonBack"
+			enabled="false"
+			text="Navigate Back"
+			press=".onButtonBackClick"
+			class="sapUiSmallMarginBottom" />
+            
+		<core:Fragment fragmentName="com.sap.postcard.postcard.view.fragments.postCard" type="XML" />
+	<!-- </Page> -->
 </mvc:View>

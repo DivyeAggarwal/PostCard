@@ -1,0 +1,137 @@
+<mvc:View
+		controllerName="com.sap.postcard.postcard.controller.postcardCreate"
+		height="100%"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:core="sap.ui.core"
+		xmlns:layout="sap.ui.layout"
+		xmlns="sap.m"
+		xmlns:f="sap.f"
+		xmlns:fb="sap.ui.comp.filterbar"
+		xmlns:vm="sap.ui.comp.variants">
+		<f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}">
+			<!-- DynamicPage Title -->
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<vm:VariantManagement standardItemText="Post Cards">
+						</vm:VariantManagement>
+					</f:heading>
+					<f:actions>
+						<ToolbarSpacer/>
+						<Button
+								text="Global Action"
+								type="Transparent"/>
+						<Button
+								text="Toggle Footer"
+								type="Transparent"
+								press="onToggleFooter"/>
+						<Button
+								icon="sap-icon://add"
+								type="Transparent"
+                                press="onAddPostcard"/>
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<!-- DynamicPage Header -->
+			<f:header>
+				<f:DynamicPageHeader pinnable="true">
+					<f:content>
+						<fb:FilterBar id="filterbar" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+							<fb:filterItems>
+								<fb:FilterItem name="A" label="User">
+									<fb:control>
+										<Select
+										id="slName"
+										forceSelection="true"
+										change="onSelectChange"
+										items="{
+                                                    path: ''
+                                                }">
+										<core:Item key="{key}" text="{name}"/>
+										</Select>
+									</fb:control>				
+								</fb:FilterItem>								
+								<fb:FilterItem name="B" label="Customer">
+									<fb:control>
+										<Select
+										id="slCategory"
+										change="onSelectChange"
+										forceSelection="true"
+										items="{
+                                                    path: ''
+                                                 }">
+										<core:Item key="{key}" text="{name}"/>
+										</Select>
+									</fb:control>				
+								</fb:FilterItem>				
+								<fb:FilterItem name="C" label="Assignment">
+									<fb:control>
+										<Select
+										id="slSupplierName"
+										change="onSelectChange"
+										forceSelection="true"
+										items="{
+                                                    path: ''
+                                                }">
+										<core:Item key="{key}" text="{name}"/>
+										</Select>
+									</fb:control>				
+								</fb:FilterItem>
+							</fb:filterItems>
+						</fb:FilterBar>
+					</f:content>
+				</f:DynamicPageHeader>
+			</f:header>
+
+			<!-- DynamicPage Content -->
+			<f:content>
+				<Table
+						id="idProductsTable"
+						inset="false"
+						items="{
+                            path: '/PostCard'
+                        }">
+
+					<columns>
+						<Column
+								minScreenWidth="Tablet"
+								demandPopin="true">
+							<Text text="User"/>
+						</Column>
+						<Column
+								minScreenWidth="Tablet"
+								demandPopin="true">
+							<Text text="Customer"/>
+						</Column>
+						<Column
+								minScreenWidth="Tablet"
+								demandPopin="true">
+							<Text text="Assignment"/>
+						</Column>
+					</columns>
+
+					<items>
+						<ColumnListItem
+								vAlign="Middle">
+							<cells>
+								
+										
+                                        <Text text="{Customer}"/>
+								<Text text="{Customer}"/>
+								<Text text="{Assignment}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</f:content>
+
+			<!-- DynamicPage Footer -->
+			<!-- <f:footer>
+				<OverflowToolbar>
+					<ToolbarSpacer/>
+					<Button type="Accept" text="Accept"/>
+					<Button type="Reject" text="Reject"/>
+				</OverflowToolbar>
+			</f:footer> -->
+		</f:DynamicPage>
+</mvc:View>

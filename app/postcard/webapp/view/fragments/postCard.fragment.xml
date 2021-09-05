@@ -1,8 +1,8 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<Panel
+	<!-- <Panel
 		id="quickViewCardContainer"
-		width="600px"
-		height="600px">
+		width="auto"
+		height="100px"> -->
 		<QuickViewCard
 			id="quickViewCard"
 			pages="{ path : '/pages', templateShareable : true }"
@@ -31,5 +31,5 @@
 				</QuickViewGroup>
 			</QuickViewPage>
 		</QuickViewCard>
-	</Panel>
+	<!-- </Panel> -->
 </core:FragmentDefinition>
